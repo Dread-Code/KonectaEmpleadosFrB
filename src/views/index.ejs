@@ -1,0 +1,91 @@
+
+<%-include('partials/_header');%>
+    <div class="container">
+        <div class="row">
+            <!-- FORM -->
+            <div class="col-md-8 offset-md-2 ">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/add" method="POST">
+                            <div class="form-group">
+                                <input type="text" name="nombre" placeholder="Nombre " class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text"x name="cedula" placeholder="Cedula " class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="telefono" placeholder="Telefono " class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="direccion" placeholder="Direccion " class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="date" name="fechaNacimiento" placeholder="Fecha de naciminento " class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="genero" placeholder="Genero" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="cliente" placeholder="Cliente " class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="sede" placeholder="Sede " class="form-control" >
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- LIST -->
+            
+        </div>
+    </div>
+<br>
+<br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Cedula</th>
+                        <th>Telefono</th>
+                        <th>Direccion</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Cliente</th>
+                        <th>Sede</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                      </tr>  
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i < usuarios.length; i++ ){ %>
+                            <tr>
+                                <td> <%= usuarios[i].nombre %></td>
+                                <td> <%= usuarios[i].cedula %></td>
+                                <td> <%= usuarios[i].telefono%></td>
+                                <td> <%= usuarios[i].direccion %></td>
+                                <td> <%= usuarios[i].fechaNacimiento%></td>
+                                <td> <%= usuarios[i].cliente %></td>
+                                <td> <%= usuarios[i].sede %></td>
+                                <td>
+                                    <a href="/edit/<%= usuarios[i].cedula %>" class="btn btn-info">Editar</a>
+                                    
+                                </td>
+                                <td>
+                                    <a href="/delete/<%= usuarios[i].cedula %>" class="btn btn-danger">Eliminar</a>
+                                    
+                                </td>
+                            </tr>
+                        <% } %>    
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+
+<%-include('partials/_footer');%>

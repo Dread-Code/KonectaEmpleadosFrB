@@ -1,0 +1,44 @@
+<%-include('partials/_header');%>
+<div class="col-md-9">
+    <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Cedula</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Fecha de nacimiento</th>
+            <th>Cliente</th>
+            <th>Sede</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>  
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < usuarios.length; i++ ){ %>
+                <tr>
+                    <td> <%= usuarios[i].nombre %></td>
+                    <td> <%= usuarios[i].cedula %></td>
+                    <td> <%= usuarios[i].telefono%></td>
+                    <td> <%= usuarios[i].direccion %></td>
+                    <td> <%= usuarios[i].fechaNacimiento%></td>
+                    <td> <%= usuarios[i].cliente %></td>
+                    <td> <%= usuarios[i].sede %></td>
+                    <td>
+                        <a href="/edit/<%= usuarios[i].cedula %>" class="btn btn-info">Editar</a>
+                        
+                    </td>
+                    <td>
+                        <a href="/delete/<%= usuarios[i].cedula %>" class="btn btn-danger">Eliminar</a>
+                        
+                    </td>
+                </tr>
+            <% } %>    
+        </tbody>
+        
+    </table>
+</div>
+</div>
+</div>
+
+<%-include('partials/_footer');%>
