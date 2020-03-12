@@ -11,7 +11,6 @@
                     <th>Telefono</th>
                     <th>Direccion</th>
                     <th>Fecha de nacimiento</th>
-                    <th>Edad</th>
                     <th>Genero</th>
                     <th>Cliente</th>
                     <th>Sede</th>
@@ -20,32 +19,31 @@
                   </tr>  
                 </thead>
                 <tbody>
-                    <% for(var i = 0; i < usuarios.length; i++ ){ %>
+                   
                         <tr>
-                            <td> <%= usuarios[i].nombre %></td>
-                            <td> <%= usuarios[i].cedula %></td>
-                            <td> <%= usuarios[i].telefono%></td>
-                            <td> <%= usuarios[i].direccion %></td>
-                            <td> <%= usuarios[i].fechaNacimiento%></td>
-                            <td> <%= usuarios[i].edad %></td>
-                            <td> <%= usuarios[i].genero%></td>
-                            <td> <%= usuarios[i].cliente %></td>
-                            <td> <%= usuarios[i].sede %></td>
+                            <td> <%= usuario.nombre %></td>
+                            <td> <%= usuario.cedula %></td>
+                            <td> <%= usuario.telefono%></td>
+                            <td> <%= usuario.direccion %></td>
+                            <td> <%= usuario.fechaNacimiento%></td>
+                            <td> <%= usuario.genero%></td>
+                            <td> <%= usuario.cliente %></td>
+                            <td> <%= usuario.sede %></td>
                             <td>
-                                <a href="/edit/<%= usuarios[i].cedula %>" class="btn btn-info">Editar</a>
+                                <a href="/edit/<%= usuario.cedula %>" class="btn btn-info">Editar</a>
                                 
                             </td>
                             <td>
-                                <a href="/delete/<%= usuarios[i].cedula %>" class="btn btn-danger">Eliminar</a>
+                                <a href="/delete/<%= usuario.cedula %>" class="btn btn-danger">Eliminar</a>
                                 
                             </td>
                         </tr>
-                    <% } %>    
+                       
                 </tbody>
                 
             </table>
         </div>
     </div>
 </div>
-<script src="../utilities/utilities.js"></script>
+
 <%-include('partials/_footer');%>

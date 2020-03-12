@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Usuario =require('../models/users');
-
+const Usuario = require('../models/users');
+const {getAnio} = require('../utilities/utilities')
+const moment = require('moment')
+//==============================
+// Renderiza la ruta Index
+//==============================
 router.get('/',async(req,res)=>{
     
     const usuarios = await Usuario.find();
@@ -10,6 +14,9 @@ router.get('/',async(req,res)=>{
         usuarios
     });
 })
+//==============================
+// Obtiene los usuarios y los muestra en la tabla 
+//==============================
 
 router.get('/list',async(req,res)=>{
     
@@ -18,28 +25,49 @@ router.get('/list',async(req,res)=>{
     res.render('list',{
         usuarios
     });
-})
+});
+
+//==============================
+// Se supone que serviria :v actualizacion a futuro
+//==============================
+
+//==============================
+// Agraga un usuario desde el formulario index
+//==============================
 
 router.post('/add',(req,res)=>{
 
     let body = req.body;
+    
+    let usuario = new Usuario({
+        nombre: body.nombre,
+        cedula: body.cedula,
+        telefono: body.telefono,
+        direccion: body.direccion,
+        fechaNacimiento: moment(body.fechaNacimiento).format('l'),
+        genero: body.genero,
+        edad: getAnio(body.fechaNacimiento),
+        cliente: body.cliente,
+        sede: body.sede 
+    });
 
-    let usuario = new Usuario(body);
-
-    usuario.save(((err,usuarioDB)=>{
-
+    usuario.save(((err,usuario)=>{
+        
         if (err) {
             return res.status(400).json({
                 ok:false,
                 err
             });
         }
-        // usuarioDb.password = null;
-
+       
+        console.log(usuario);
         res.redirect('/');
     }));
 
 });
+//==============================
+// Al hacer click en editar lanza un nuevo formulario 
+//==============================
 
 router.get('/edit/:cedula',async(req,res)=>{
 
@@ -52,6 +80,23 @@ router.get('/edit/:cedula',async(req,res)=>{
 
 });
 
+//==============================
+// Se supone que serviria :v actualizacion a futuro
+//==============================
+
+router.get('/list-usuario/:cedula',async(req,res)=>{
+
+    let cedula  = req.params.cedula;
+    let usuario = await Usuario.findOne({cedula:cedula});
+    console.log(usuario);
+    res.render('list',{
+        usuario
+    });
+
+});
+//==============================
+// edita el usuario desde el formulario 
+//==============================
 router.post('/edit/:cedula',async(req,res)=>{
 
     let cedula  = req.params.cedula;
@@ -59,9 +104,12 @@ router.post('/edit/:cedula',async(req,res)=>{
 
     await Usuario.findOneAndUpdate({cedula:cedula},body);
     
-    res.redirect('/');
+    res.redirect('/list');
 
 });
+//==============================
+// Elimina un usuario 
+//==============================
 
 router.get('/delete/:cedula',async(req,res)=>{
 
@@ -69,8 +117,7 @@ router.get('/delete/:cedula',async(req,res)=>{
 
     await Usuario.findOneAndRemove({cedula : cedula});
 
-    res.redirect('/');
-
+    res.redirect('/list');
 
 });
 

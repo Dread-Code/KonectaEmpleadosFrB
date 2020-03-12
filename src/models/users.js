@@ -12,9 +12,9 @@ let usuarioSchema = new Schema({
         required: [true,'Ingrese el nombre completo por favor']
     },
     cedula:{
-
         type: Number,
-        required: [true, ' La cedula es necesaria']
+        required: [true, ' La cedula es necesaria'],
+        unique:true
     },  
     telefono: {
         type: Number,
@@ -25,12 +25,14 @@ let usuarioSchema = new Schema({
 
     },
     fechaNacimiento:{
-        type: Date,
+        type: String,
         required: [true, 'La fecha es requerida']
     },
     genero:{
-        type:String,
-        enum: generos
+        type:String
+    },
+    edad:{
+        type: String
     },
     cliente:{
         type: String,
