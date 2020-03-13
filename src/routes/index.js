@@ -3,6 +3,7 @@ const router = express.Router();
 const Usuario = require('../models/users');
 const {getAnio} = require('../utilities/utilities')
 const moment = require('moment')
+
 //==============================
 // Renderiza la ruta Index
 //==============================
@@ -13,7 +14,7 @@ router.get('/',async(req,res)=>{
     res.render('index',{
         usuarios
     });
-})
+});
 //==============================
 // Obtiene los usuarios y los muestra en la tabla 
 //==============================
@@ -61,7 +62,7 @@ router.post('/add',(req,res)=>{
         }
        
         console.log(usuario);
-        res.redirect('/');
+        res.redirect('/list');
     }));
 
 });
@@ -80,20 +81,8 @@ router.get('/edit/:cedula',async(req,res)=>{
 
 });
 
-//==============================
-// Se supone que serviria :v actualizacion a futuro
-//==============================
 
-router.get('/list-usuario/:cedula',async(req,res)=>{
 
-    let cedula  = req.params.cedula;
-    let usuario = await Usuario.findOne({cedula:cedula});
-    console.log(usuario);
-    res.render('list',{
-        usuario
-    });
-
-});
 //==============================
 // edita el usuario desde el formulario 
 //==============================
